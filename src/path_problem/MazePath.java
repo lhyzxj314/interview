@@ -5,7 +5,7 @@ import java.util.Stack;
 public class MazePath {
   private static final int PASSED   = -1;    // 已经过标识
   private static final int WALL      = 0;    // 墙
-  private static final int PATH      = 1;    // 可移动的路径
+  //private static final int PATH      = 1;    // 可移动的路径
   private static final int CHEESE    = 9;    // 奶酪
   
   private static final int STEP_FORWARD = 1;  // 向前一步

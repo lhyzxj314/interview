@@ -1,10 +1,10 @@
-package array.min_knum;
+package array;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class Solution {
+public class MinKNum {
   public static void main(String[] args) {
 
   }

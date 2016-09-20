@@ -1,4 +1,4 @@
-package linked_list.reserve_list;
+package linked_list.reserve_linkedlist;
 
 public class ListNode {
 	int val;

@@ -27,7 +27,7 @@ public class SprinklerSystem {
 		sb.append(valve3);
 		sb.append(" ");
 		sb.append("valve4 = ");
-		sb.append(valve1);
+		sb.append(valve4);
 		sb.append("\n");
 		sb.append("i = ");
 		sb.append(i);
@@ -38,6 +38,12 @@ public class SprinklerSystem {
 		sb.append("source = ");
 		sb.append(source);
 		return sb.toString();
+	}
+	
+	public void test() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("valv1 = ").append(valve1);
+		sb.append(valve2 + "," + valve3);
 	}
 	
 	public static void main(String[] args) {

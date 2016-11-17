@@ -2,6 +2,8 @@ package temp;
 
 import java.util.Scanner;
 
+import sun.net.www.http.HttpClient;
+
 public class Test1 {
 	
 	public static void main(String[] args) {
@@ -32,6 +34,10 @@ public class Test1 {
 			}
 		}
 		System.out.println(minInterval);
+	}
+	
+	public void test() {
+	  
 	}
 
 }

@@ -4,13 +4,19 @@ import thinking_in_java.string.try_catch.exception_restriction.exception.Basebal
 import thinking_in_java.string.try_catch.exception_restriction.exception.Foul;
 import thinking_in_java.string.try_catch.exception_restriction.exception.PopFoul;
 import thinking_in_java.string.try_catch.exception_restriction.exception.RainedOut;
+import thinking_in_java.string.try_catch.exception_restriction.exception.Strike;
 
+/**
+ * 测试：异常限制条件
+ * @author xshrimp
+ * 2016年11月17日
+ */
 public class StormyInning extends Inning implements Storm {
 
   // 1.必须声明出父类构造器异常(或异常的父类, 与普通方法相反:可接受子类异常)，且可在父类构造器基础增加新异常
   // 2.子类构造器抓不到父类构造器抛出的异常
   public StormyInning() 
-      throws Exception, RainedOut {
+      throws BaseballException, RainedOut {
     super();
   }
   public StormyInning(String s) 
@@ -36,17 +42,42 @@ public class StormyInning extends Inning implements Storm {
     
   }
   
-  public void rainHard() throws RainedOut {
+  public void rainHard() 
+      throws RainedOut {
     
   }
   
   // 合法：重载方法可减少异常抛出种类，且抛出的异常可以是父类异常的继承类(is-a关系，未新增异常种类)
-  public void atBat() throws PopFoul {
+  public void atBat() 
+      throws PopFoul {
     
   }
   
   public static void main(String[] args) {
-    
+      try {
+        StormyInning si = new StormyInning();
+        si.atBat();
+      } catch (PopFoul e) { // 此catch子句可删去，将该异常作为其父异常BaseballException处理
+        e.printStackTrace();
+      } catch (RainedOut e) {
+        e.printStackTrace();
+      } catch (BaseballException e) {
+        e.printStackTrace();
+      }
+      
+      try {
+        Inning i = new StormyInning();
+        i.atBat();
+      } catch (Strike e) {
+        e.printStackTrace();
+      } catch (Foul e) {
+        e.printStackTrace();
+      } catch (RainedOut e) {
+        e.printStackTrace();
+      } catch (BaseballException e) {
+        e.printStackTrace();
+      }
+      
   }
 
 }

@@ -8,8 +8,15 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Main {
+/**
+ * 求输入字符串的最大回文自序列长度
+ * 
+ * @author xshrimp
+ * 2017年4月3日
+ */
+public class MaxLoopRecursion {
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
@@ -39,17 +46,29 @@ public class Main {
         map.get(c).add(i);
       }
     }
-
-    //StringBuilder res = new StringBuilder();
-    Set<Character> set = map.keySet();
-    // 尝试计算字符串str可能包含的回文
-    for (Character c : set) {
-      List<Integer> indexs = new ArrayList<Integer>(map.get(c)); // 字符c所有出现位置
-      Collections.sort(indexs);
-      int indexMax = indexs.get(indexs.size() - 1); // 字符c最大索引
-      int indexMin = indexs.get(0); // 字符c最小索引
     
+    // 所有区段
+    Set<Character> set = map.keySet();
+    List<Interval> intervals = new CopyOnWriteArrayList<Interval>();
+    for (Character c : set) {
+      Interval interval = new Interval(c, map.get(c));
+      intervals.add(interval);
+    }
+    
+    // 去处被包含区段
+    for (int i = 0; i < intervals.size(); i++) {
+      for (int j = i + 1; j < intervals.size(); j++) {
+        if (intervals.get(i).contains(intervals.get(j))) {
+          intervals.remove(intervals.get(j));
+        }
+      }
+    }
+    
+    // 尝试计算字符串str可能包含的回文
+    for (Interval interval : intervals) {
       StringBuilder tempRes = new StringBuilder();
+      int indexMin = interval.indexMin;
+      int indexMax = interval.indexMax;
       if (cache.get(str) != null && 
           cache.get(str).length() >= (indexMax - indexMin + 1)) {
         tempRes = cache.get(str);
@@ -73,5 +92,46 @@ public class Main {
     }
     return cache.get(str);
   }
+  
+  static class Interval {
+    private static int count = 0;
+    private final int id = count++;
+    final char c;
+    final int indexMax;
+    final int indexMin;
+    
+    Interval(char c, Set<Integer> indexSet) {
+      List<Integer> indexs = new ArrayList<Integer>(indexSet); // 字符c所有出现位置
+      Collections.sort(indexs);
+      this.c = c;
+      this.indexMin = indexs.get(0);
+      this.indexMax = indexs.get(indexs.size() - 1);
+    }
+    
+    public boolean contains(Interval other) {
+      if (other.indexMax <= this.indexMax
+          && other.indexMin >= this.indexMin) {
+        return true;
+      }
+      return false;
+    }
+    
 
+    @Override
+    public String toString() {
+      return "id=" + id + ", c=" + c;
+    }
+
+    @Override
+    public int hashCode() {
+      return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      Interval that = (Interval) obj;
+      if (this.id == that.id) return true;
+      else return false;
+    }
+  }
 }

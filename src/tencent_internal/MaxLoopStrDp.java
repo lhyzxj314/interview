@@ -29,9 +29,10 @@ public class MaxLoopStrDp {
     StringBuilder strb = new StringBuilder(str);
     char[] revChars = strb.reverse().toString().toCharArray();
     
-    // 初始化dp表格
-    int[][] table = new int[length][length];
+    // table[i][j]表示子串chars[0->i]与revChars[0->j]之间最大公共子序列长度
+    int[][] table = new int[length][length]; 
     if (chars[0] == revChars[0]) table[0][0] = 1; 
+    // 初始化dp表格
     for (int i = 1; i < length; i++) {
       if (chars[0] == revChars[i])
         table[0][i] = 1;

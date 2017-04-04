@@ -9,8 +9,12 @@ public class Main {
 		
 		int maxValue = 0;
 		int weaponNum = 0;
+		/*
+		 * cost[i][j]表示:
+		 * 在武器数为i，价格上限为j的条件下能够获得的最大攻击力
+		 */
 		int[][] cost = null;
-		int[] weight = null;           // 战斗力
+		int[] weight = null;           // 攻击力
 		int[] price = null;            // 价格
 		
 		weaponNum = sc.nextInt();   // 武器种类数
@@ -31,7 +35,7 @@ public class Main {
 					int priceA = cost[i - 1][j];
 					int priceB = cost[i - 1][j - price[i]] + weight[i];
 					cost[i][j] = Math.max(priceA, priceB);
-				} else 
+				} else
 					cost[i][j] = cost[i - 1][j];
 			}
 		}

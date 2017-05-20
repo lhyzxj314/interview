@@ -1,4 +1,4 @@
-package tencent_internal;
+package knapsack_problem;
 
 import java.util.ArrayList;
 import java.util.Collections;

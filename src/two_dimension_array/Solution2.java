@@ -1,4 +1,4 @@
-package point_offer.two_dimension_array;
+package two_dimension_array;
 
 /**
  * 二维数组(n*m)中的查找：

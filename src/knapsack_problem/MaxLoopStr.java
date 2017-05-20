@@ -1,4 +1,4 @@
-package tencent_internal;
+package knapsack_problem;
 
 import java.util.LinkedList;
 import java.util.Scanner;

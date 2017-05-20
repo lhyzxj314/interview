@@ -2,32 +2,38 @@ package knapsack_problem;
 
 import java.util.Scanner;
 
+/**
+ * 爱奇艺原题：
+ * 0-1背包问题(未解决：原因超时)
+ * @author xshrimp
+ * 2017年5月20日
+ */
 public class Main {
 	
 	public static void main(String[] args) {
+	  /* ** 处理输入 ***/
 		Scanner sc = new Scanner(System.in);
+		String firstLine = sc.nextLine();
+		sc.close();
+		String[] strArr = firstLine.split(" ");
+		int[] arr = new int[strArr.length];
+		for (int i = 0; i < strArr.length; i++)
+		  arr[i] = Integer.parseInt(strArr[i]);
 		
-		int maxValue = 0;
-		int weaponNum = 0;
+		int weaponNum = (strArr.length - 1) / 2; // 节目总数
+		int maxValue = arr[0];                   // 预算B
+		int[] weight = new int[weaponNum + 1];   // 收视率
+		int[] price  = new int[weaponNum + 1];   // 价格
+		for (int i = 1,j = 1; i < strArr.length; i+=2) {
+		  price[j]  = arr[i];
+		  weight[j] = arr[i+1];
+		  j++;
+		}
 		/*
 		 * cost[i][j]表示:
-		 * 在武器数为i，价格上限为j的条件下能够获得的最大攻击力
+		 * 在节目数为i，价格上限为j的条件下能够获得的最大收视率
 		 */
-		int[][] cost = null;
-		int[] weight = null;           // 攻击力
-		int[] price = null;            // 价格
-		
-		weaponNum = sc.nextInt();   // 武器种类数
-		maxValue  = sc.nextInt();   // 价格上限
-		cost = new int[weaponNum + 1][maxValue + 1];
-		price = new int[weaponNum + 1];
-		weight = new int[weaponNum + 1];
-		for (int i = 1; i <= weaponNum; i++) {
-			weight[i] = sc.nextInt();
-			price[i] = sc.nextInt();
-		}
-		sc.close();
-		
+		int[][] cost = new int[weaponNum + 1][maxValue + 1];
 		
 		for (int i = 1; i <= weaponNum; i++) {
 			for (int j = 1; j <= maxValue; j++) {

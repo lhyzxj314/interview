@@ -29,7 +29,7 @@ public class Solution {
 	 		int len1 = 0;
 	        int len2 = 0;
 	        ListNode h1 = pHead1;
-	        // Í³¼Æ2¸öÁ´±íµÄ³¤¶È
+	        // Í³ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
 	        while (h1 != null) {
 	            h1 = h1.next;
 	            len1++;
@@ -41,14 +41,14 @@ public class Solution {
 	        }
 	        
 	        int diff = (len1>=len2) ? (len1-len2) : (len2-len1);
-	        h1 = (len1>=len2) ? pHead1 : pHead2;          // ³¤Á´±í
-	        ListNode h2 = (h1==pHead1) ? pHead2 : pHead1; // ¶ÌÁ´±í
-	        // ºöÂÔ³¤Á´±íµÄ¶àÓàÔªËØ
+	        h1 = (len1>=len2) ? pHead1 : pHead2;          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	        ListNode h2 = (h1==pHead1) ? pHead2 : pHead1; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	        // ï¿½ï¿½ï¿½Ô³ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	        for (; diff > 0; diff--) {
 	            h1 = h1.next;
 	        }
 	        
-	        // ²éÕÒÏàÍ¬ÔªËØ
+	        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬Ôªï¿½ï¿½
 	        while (h1 != h2) {
 	            h1 = h1.next;
 	            h2 = h2.next;

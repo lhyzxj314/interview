@@ -1,4 +1,4 @@
-package linked_list.common_node;
+package linked_list;
 
 public class ListNode {
   int val;

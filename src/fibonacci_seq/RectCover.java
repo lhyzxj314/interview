@@ -1,13 +1,19 @@
-package rect_cover;
+package fibonacci_seq;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Test {
+/**
+ * 矩形覆盖问题
+ * 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+ * @author xshrimp
+ * 2017年5月25日
+ */
+public class RectCover {
   Map<Integer, Integer> map = new HashMap<Integer, Integer>();
   
   /** 用迭代方法计算斐波拉契数列 */
-  public int RectCover(int n) {
+  public int RectCover1(int n) {
     if (n <= 2) 
       return n;
     
@@ -30,7 +36,7 @@ public class Test {
     if (n <= 2)  // 递归终止条件
       return n;
     
-    int count = RectCover(n - 1) + RectCover(n - 2);
+    int count = RectCover2(n - 1) + RectCover2(n - 2);
     return count;
   }
   
@@ -41,7 +47,7 @@ public class Test {
     
     int res = 0;
     if (map.get(target) != null) {             // 散列表未存有计算结果，递归计算并存入散列表
-      res = RectCover(target - 1) + RectCover(target - 2);
+      res = RectCover3(target - 1) + RectCover3(target - 2);
       map.put(target, res);                         
     } else {                              // 散列表存有计算结果，从散列表中取出
       res = map.get(target);
@@ -49,7 +55,7 @@ public class Test {
     return res;
   }
 
-  public int RectCover1(int target) {
+  public int RectCover4(int target) {
     if (target <= 0)
       return 0; // 排除特殊情况
     int n1 = target / 2; // 最多可以有组合块n1个
@@ -64,7 +70,7 @@ public class Test {
     return result;
   }
   
-
+  // 组合数算法
   private int comb(int m, int n) {
     n = n < (m - n) ? n : (m - n);
     int res = 1;

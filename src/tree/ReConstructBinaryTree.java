@@ -10,7 +10,7 @@ public class ReConstructBinaryTree {
   public TreeNode reConstructBinaryTree(int[] pre, int[] in) {
     if (pre == null || in == null)
       return null;
-
+    
     TreeNode root = reConstructBinaryTree(pre, 0, pre.length - 1, in, 0, in.length - 1);
 
     return root;

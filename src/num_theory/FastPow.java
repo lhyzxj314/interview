@@ -1,4 +1,4 @@
-package netease;
+package num_theory;
 
 import java.util.*;
 
@@ -7,7 +7,7 @@ import java.util.*;
  * 
  * @author xshrimp 2017年4月4日
  */
-public class Main_fastPow {
+public class FastPow {
 
   static class Matrix {
     final int N;
@@ -64,6 +64,7 @@ public class Main_fastPow {
     Scanner scan = new Scanner(System.in);
     String firstLine = scan.nextLine();
     String secondLine = scan.nextLine();
+    scan.close();
     int n = Integer.parseInt(firstLine.split(" ")[0]);
     int k = Integer.parseInt(firstLine.split(" ")[1]);
 

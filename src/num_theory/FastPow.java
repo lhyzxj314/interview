@@ -1,4 +1,4 @@
-package netease;
+package num_theory;
 
 import java.util.*;
 
@@ -7,7 +7,7 @@ import java.util.*;
  * 
  * @author xshrimp 2017年4月4日
  */
-public class Main_fastPow {
+public class FastPow {
 
   static class Matrix {
     final int N;

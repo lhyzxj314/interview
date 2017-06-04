@@ -16,7 +16,7 @@ public class PrintMatrix {
   private final static int LEFT = 2;
   private final static int UP   = 3;
   
-  public ArrayList<Integer> printMatrix(int[][] matrix) {
+  public ArrayList<Integer> printMatrix1(int[][] matrix) {
     int lenX = matrix[0].length;
     int lenY = matrix.length;
     int num = lenX * lenY;
@@ -83,10 +83,36 @@ public class PrintMatrix {
     return res;
   }
   
+  public ArrayList<Integer> printMatrix2(int[][] matrix) {
+    if (matrix == null || matrix.length == 0)
+      return new ArrayList<Integer>();
+    int col = matrix[0].length;
+    int row = matrix.length;
+    
+    int layer = (Math.min(col, row) - 1)/2 + 1;  // 层数
+    
+    ArrayList<Integer> res = new ArrayList<Integer>(row*col);
+    int left = 0, right = col - 1, top = 0, bottom = row - 1;
+    for (int i = 0; i < layer; i++) {
+      for (int j = i; j <= right-i; j++)            
+        res.add(matrix[i][j]);         // 从左向右
+      for (int k = i+1; k <= bottom-i; k++)         
+        res.add(matrix[k][right - i]); // 从上至下
+      for (int m = right-i-1; m >= left+i && bottom-i!=i; m--)     
+        res.add(matrix[bottom - i][m]);// 从右向左
+      for (int n = bottom-i-1; n >= top+i+1 && right-i!=i; n--)   
+        res.add(matrix[n][i]);         // 从下至上
+    }
+    return res;
+  }
+  
   public static void main(String[] args) {
-    int[][] matrix = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,16}};
+    //int[][] matrix = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,16}};
+    int[][] matrix = {{1,2},{3,4},{5,6},{7,8},{9,10}};
     PrintMatrix obj = new PrintMatrix();
-    List<Integer> res = obj.printMatrix(matrix);
+    List<Integer> res = obj.printMatrix2(matrix);
     System.out.println(res);
+    List<Integer> res1 = obj.printMatrix1(matrix);
+    System.out.println(res1);
   }
 }

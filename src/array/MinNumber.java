@@ -26,7 +26,7 @@ public class MinNumber {
       public int compare(String str1, String str2) {
         String s1 = str1 + str2;
         String s2 = str2 + str1;
-          
+        
         int res = s1.compareTo(s2); 
         
         return res;

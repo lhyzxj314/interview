@@ -4,11 +4,16 @@ package linked_list;
  * 删除链表中重复的节点
  * 
  * 在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
- * @author xshrimp
- * 2017年6月5日
+ * 
+ * @author xshrimp 2017年6月5日
  */
 public class DeleteDuplication {
-  public ListNode deleteDuplication(ListNode pHead) {
+  /**
+   * 递归实现
+   * @param pHead
+   * @return
+   */
+  public ListNode deleteDuplication1(ListNode pHead) {
     if (pHead == null)
       return null;
     if (pHead.next == null)
@@ -18,15 +23,40 @@ public class DeleteDuplication {
       while (pHead.next != null && pHead.val == pHead.next.val)
         pHead = pHead.next;
       pHead = pHead.next;
-      pHead = deleteDuplication(pHead);
+      pHead = deleteDuplication1(pHead);
     } else
-      pHead.next = deleteDuplication(pHead.next);
+      pHead.next = deleteDuplication1(pHead.next);
 
     return pHead;
   }
 
+  /**
+   * 迭代实现
+   * @param pHead
+   * @return
+   */
+  public ListNode deleteDuplication2(ListNode pHead) {
+    ListNode first = new ListNode(-1);
+    ListNode last = first;
+    first.next = pHead;
+    
+    ListNode p = pHead;
+    while (p != null && p.next != null) {
+      if (p.val == p.next.val) {
+        int val = p.val;
+        while (p != null && p.val == val)
+          p = p.next;
+        last.next = p;
+      } else {
+        last = p;
+        p = p.next;
+      }
+    }
+    return first.next;
+  }
+
   public static void main(String[] args) {
-    ListNode head = new ListNode(1);
+    ListNode head = new ListNode(2);
     ListNode n1 = new ListNode(2);
     head.next = n1;
     ListNode n2 = new ListNode(3);
@@ -41,7 +71,7 @@ public class DeleteDuplication {
     n5.next = n6;
 
     DeleteDuplication obj = new DeleteDuplication();
-    head = obj.deleteDuplication(head);
+    head = obj.deleteDuplication2(head);
     while (head != null) {
       System.out.println(head.val);
       head = head.next;

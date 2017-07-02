@@ -2,8 +2,6 @@ package temp;
 
 import java.util.Scanner;
 
-import sun.net.www.http.HttpClient;
-
 public class Test1 {
 	
 	public static void main(String[] args) {
@@ -13,6 +11,7 @@ public class Test1 {
 		for (int i = 0; i < n; ++i) {
 			arr[i] = sc.nextInt();
 		}
+		sc.close();
 		
 		int minInterval = Integer.MAX_VALUE;
 		for (int i = 1; i < n; ++i) {

@@ -9,7 +9,31 @@ import java.util.LinkedList;
  * 2017年7月5日
  */
 public class LeftRotateString {
+  // XY = (X'Y')'
   public String leftRotateString(String str,int n) {
+    if (str == null || "".equals(str))
+      return str;
+    
+    int len = str.length();
+    n %= len;
+    StringBuilder sb = new StringBuilder(str);
+    // 新建链表数据结构
+    for (int i = 0, j = n - 1; i < j; i++, j--)
+      swap(sb, i, j);
+    for (int i = n, j = len - 1; i < j; i++, j--)
+      swap(sb, i, j);
+    for (int i = 0, j = len - 1; i < j; i++, j--)
+      swap(sb, i, j);
+    return sb.toString();
+  }
+  
+  private void swap(StringBuilder sb, int i, int j) {
+    char temp = sb.charAt(i);
+    sb.setCharAt(i, sb.charAt(j));
+    sb.setCharAt(j, temp);
+  }
+  
+  public String leftRotateString1(String str,int n) {
     if (str == null || "".equals(str))
       return str;
     

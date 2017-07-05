@@ -11,6 +11,7 @@ public class Test1 {
 		for (int i = 0; i < n; ++i) {
 			arr[i] = sc.nextInt();
 		}
+		sc.close();
 		
 		int minInterval = Integer.MAX_VALUE;
 		for (int i = 1; i < n; ++i) {

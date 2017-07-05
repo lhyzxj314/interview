@@ -2,6 +2,7 @@ package tree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 /**
  * 二叉树中和为某一值的路径
@@ -31,9 +32,7 @@ public class FindPath {
 		return paths;
 	}
 	
-	
-	
-	/*public ArrayList<ArrayList<Integer>> findPath(TreeNode root, int target) {
+	public ArrayList<ArrayList<Integer>> findPath2(TreeNode root, int target) {
 		ArrayList<ArrayList<Integer>> paths = new ArrayList<ArrayList<Integer>>();
 		if (root == null)
 			return paths;
@@ -42,58 +41,50 @@ public class FindPath {
 		int sum = 0;
 		TreeNode node = root;
 		while (!stack.isEmpty() || node != null) {
-			stack.push(node);
+			stack.addLast(node);
 			sum += node.val;
-			if (sum == target)
-				System.out.println(Arrays.toString(stack.toArray()));
+			if (sum == target && node.left == null && node.right == null) {
+				ArrayList<Integer> path = new ArrayList<Integer>(stack.size());
+				for (TreeNode n : stack)
+					path.add(n.val);
+				paths.add(path);
+				System.out.println(Arrays.toString(path.toArray()));
+			}
 
 			if (node.left != null) {
 				node = node.left;
 			} else if (node.right != null) {
 				node = root.right;
 			} else {
-				while (!stack.isEmpty() && stack.peek().right == null) {
-					node = stack.pop();
+				while ((!stack.isEmpty() && stack.peekLast().right == null)
+						|| (!stack.isEmpty() && stack.peekLast().right == node)) {
+					node = stack.removeLast();
 					sum -= node.val;
 				}
-				node = stack.isEmpty() ? null : stack.peek().right;
+				node = stack.isEmpty() ? null : stack.peekLast().right;
 			}
 		}
 		return paths;
-	}*/
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(5);
-		TreeNode n2 = new TreeNode(3);
-		TreeNode n3 = new TreeNode(9);
-		TreeNode n4 = new TreeNode(2);
-		TreeNode n5 = new TreeNode(7);
-		TreeNode n6 = new TreeNode(4);
-		TreeNode n7 = new TreeNode(10);
-		n1.left = n2;
-		n1.right = n3;
-		n2.left = n4;
-		n2.right = n6;
-		n3.left = n5;
-		n3.right = n7;
+	    TreeNode n2 = new TreeNode(3);
+	    TreeNode n3 = new TreeNode(9);
+	    /*TreeNode n4 = new TreeNode(2);
+	    TreeNode n5 = new TreeNode(7);
+	    TreeNode n6 = new TreeNode(4);
+	    TreeNode n7 = new TreeNode(10);*/
+	    n1.left = n2;
+	    n1.right = n3;
+	   /* n2.left = n4;
+	    n2.right = n6;
+	    n3.left = n5;
+	    n3.right = n7;*/
 
 		FindPath obj = new FindPath();
-		ArrayList<ArrayList<Integer>> res = obj.findPath(n1, 12);
+		ArrayList<ArrayList<Integer>> res = obj.findPath2(n1, 14);
 		for (ArrayList<Integer> r : res)
 			System.out.println(Arrays.toString(r.toArray()));
 	}

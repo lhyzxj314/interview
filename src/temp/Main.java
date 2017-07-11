@@ -34,7 +34,7 @@ public class Main {
 		}
 	}
 	
-	public static <? extends T> void add(T obj) {
+	/*public static <? extends T> void add(T obj) {
 		
-	}
+	}*/
 }

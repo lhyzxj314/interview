@@ -33,4 +33,8 @@ public class Main {
 			return Math.max(notChooseRes, chooseRes);
 		}
 	}
+	
+	public static <? extends T> void add(T obj) {
+		
+	}
 }

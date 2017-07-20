@@ -1,4 +1,4 @@
-package knapsack_problem;
+package dynamic_programming;
 
 import java.util.ArrayList;
 import java.util.Collections;

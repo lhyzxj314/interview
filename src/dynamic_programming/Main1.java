@@ -10,7 +10,7 @@ public class Main1 {
 		int maxValue = 0;
 		int weaponNum = 0;
 		/*
-		 * cost[i][j]表示:
+		 * cost[i][j]表示：
 		 * 在武器数为i，价格上限为j的条件下能够获得的最大攻击力
 		 */
 		int[][] cost = null;

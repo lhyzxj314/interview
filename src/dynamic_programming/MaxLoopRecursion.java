@@ -30,6 +30,7 @@ public class MaxLoopRecursion {
       System.out.println(res);
       System.out.println(input.length() - res.length());
     }
+    sc.close();
   }
 
   static StringBuilder longestLoopStr(StringBuilder str, Map<StringBuilder, StringBuilder> cache) {

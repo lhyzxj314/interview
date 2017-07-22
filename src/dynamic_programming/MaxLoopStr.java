@@ -22,6 +22,7 @@ public class MaxLoopStr {
       System.out.println(input.length() - res.length());
       
     }
+    sc.close();
   }
 
   private static String longestLoopStr(String input) {

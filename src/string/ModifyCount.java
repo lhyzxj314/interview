@@ -5,73 +5,74 @@ import java.util.Scanner;
 
 public class ModifyCount {
 
-	public static void main(String[] args) {
-		while (true) {
-			Scanner sc = new Scanner(System.in);
-			String input = sc.nextLine();
-			int res = new ModifyCount().modifyCount(input);
-			System.out.println(res);
-		}
-	}
+  public static void main(String[] args) {
+    while (true) {
+      Scanner sc = new Scanner(System.in);
+      String input = sc.nextLine();
+      sc.close();
+      int res = new ModifyCount().modifyCount(input);
+      System.out.println(res);
+    }
+  }
 
-	public int modifyCount(String input) {
-		if (input == null || "".equals(input))
-			return 0;
+  public int modifyCount(String input) {
+    if (input == null || "".equals(input))
+      return 0;
 
-		String strs[] = input.split(" ");
+    String strs[] = input.split(" ");
 
-		char[] str1 = strs[0].toCharArray();
-		char[] str2 = strs[1].toCharArray();
-		int count = 0;
-		/* ³¤¶ÈÏàµÈ£¬½«²»Í¬µÄ×Ö·û½øÐÐÌæ»»¼´¿É */
-		if (str1.length == str2.length) {
-			for (int i = 0; i < str1.length; i++) {
-				if (str1[i] != str2[i]) {
-					count++;
-				}
-			}
-			return count;
-		}
+    char[] str1 = strs[0].toCharArray();
+    char[] str2 = strs[1].toCharArray();
+    int count = 0;
+    /* é•¿åº¦ç›¸ç­‰ï¼Œå°†ä¸åŒçš„å­—ç¬¦è¿›è¡Œæ›¿æ¢å³å¯ */
+    if (str1.length == str2.length) {
+      for (int i = 0; i < str1.length; i++) {
+        if (str1[i] != str2[i]) {
+          count++;
+        }
+      }
+      return count;
+    }
 
-		/* ³¤¶È²»µÈ  */
-		// 1.ÕÒ³ö¶ÌÊý×é
-		if (str1.length > str2.length) {
-			char[] tmp = str1;
-			str1 = str2;
-			str2 = tmp;
-		}
-		int offset = Math.abs(str1.length - str2.length); // 2¸ö×Ö·û´®³¤¶È²î
-		str1 = Arrays.copyOf(str1, str2.length);		  // Ìî³ä¶Ì×Ö·ûÊý×é£¬Ê¹2¸öÊý×éµÈ³¤
+    /* é•¿åº¦ä¸ç­‰  */
+    // 1.æ‰¾å‡ºçŸ­æ•°ç»„
+    if (str1.length > str2.length) {
+      char[] tmp = str1;
+      str1 = str2;
+      str2 = tmp;
+    }
+    int offset = Math.abs(str1.length - str2.length); // 2ä¸ªå­—ç¬¦ä¸²é•¿åº¦å·®
+    str1 = Arrays.copyOf(str1, str2.length);      // å¡«å……çŸ­å­—ç¬¦æ•°ç»„ï¼Œä½¿2ä¸ªæ•°ç»„ç­‰é•¿
 
-		// 2.³¢ÊÔ¶Ô¶ÌµÄÏÈÌí¼ÓºóÌæ»»
-		int count1 = 0;
-		for (int i = 0, j = 0; j < str2.length;) {
-			if (j - i < offset) {
-				if (str1[i] == str2[j]) {
-					i++;
-					j++;
-				} else {
-					j++;
-					count1++;
-				}
-			} else {
-				if (str1[i] != str2[j]) {
-					count1++;
-				}
-				i++;
-				j++;
-			}
-		}
+    // 2.å°è¯•å¯¹çŸ­çš„å…ˆæ·»åŠ åŽæ›¿æ¢
+    int count1 = 0;
+    for (int i = 0, j = 0; j < str2.length;) {
+      if (j - i < offset) {
+        if (str1[i] == str2[j]) {
+          i++;
+          j++;
+        } else {
+          j++;
+          count1++;
+        }
+      } else {
+        if (str1[i] != str2[j]) {
+          count1++;
+        }
+        i++;
+        j++;
+      }
+    }
 
-		// 3.³¢ÊÔ¶Ô¶ÌµÄÏÈÌæ»»ºóÌí¼Ó
-		int count2 = 0;
-		for (int i = 0; i < str1.length; i++) {
-			if (str1[i] != str2[i]) {
-				count2++;
-			}
-		}
-		count2 += offset;
+    // 3.å°è¯•å¯¹çŸ­çš„å…ˆæ›¿æ¢åŽæ·»åŠ 
+    int count2 = 0;
+    for (int i = 0; i < str1.length; i++) {
+      if (str1[i] != str2[i]) {
+        count2++;
+      }
+    }
+    count2 += offset;
 
-		return Math.min(count1, count2);
-	}
+    return Math.min(count1, count2);
+  }
 }

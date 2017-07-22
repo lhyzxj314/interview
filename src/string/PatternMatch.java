@@ -40,6 +40,7 @@ public class PatternMatch {
 			Scanner sc = new Scanner(System.in);
 			String pattern = sc.nextLine();
 			String str = sc.nextLine();
+			sc.close();
 			if ("exit".equals(pattern) || "exit".equals(str)) {
 				break;
 			}

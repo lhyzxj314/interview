@@ -62,7 +62,7 @@ public class Duplication {
   }
   
   public static void main(String[] args) {
-    int[] numbers = new int[] { 3,1,2,4,4};
+    int[] numbers = new int[] { 3,1,2,4,4 };
     Duplication obj = new Duplication();
     boolean flag = obj.duplicate(numbers, numbers.length, new int[1]);
     System.out.println(flag);

@@ -10,6 +10,7 @@ import java.util.List;
  * 2017年8月8日
  */
 public class MaxInWindows {
+  
   public ArrayList<Integer> maxInWindows(int[] num, int size) {
     ArrayList<Integer> res = new ArrayList<Integer>();
     if (num == null || num.length == 0 || size <= 0 || size > num.length)
@@ -26,17 +27,9 @@ public class MaxInWindows {
     return res;
   }
 
- /* private static class MyComparator implements Comparator<Integer> {
-    @Override
-    public int compare(Integer o1, Integer o2) {
-      return o2 - o1;
-    }
-  }*/
-
   public static void main(String[] args) {
     MaxInWindows obj = new MaxInWindows();
     int[] num = new int[] { 2, 3, 4, 2, 6, 2, 5, 1 };
-    // int[] num = new int[] {2,3,4};
     List<Integer> res = obj.maxInWindows(num, 3);
     for (Integer n : res)
       System.out.print(n + " ");

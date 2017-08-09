@@ -1,4 +1,4 @@
-package company.huawei;
+package company.huawei.p2017;
 
 import java.util.LinkedList;
 import java.util.List;

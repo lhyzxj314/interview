@@ -2,7 +2,7 @@ package point_offer.replace_space;
 
 public class Test {
 	public String replaceSpace(StringBuffer str) {
-		if (str == null && str.length() == 0)
+		if (str == null || str.length() == 0)
 			return str.toString();
 
 		int spaceNum = 0;

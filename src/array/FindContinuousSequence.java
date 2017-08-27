@@ -32,7 +32,7 @@ public class FindContinuousSequence {
 		for (int l = endNum; l >= 2; l--) {
 			if (2*sum % l == 0) {
 				int k = 2*sum / l;
-				if ((k%2 == 0 && l%2 != 0) || (k%2 != 0 && l%2 == 0)) {
+				if (k%2 == 0 && l%2 != 0 || k%2 != 0 && l%2 == 0) {
 					int a1 = (k - l + 1) / 2;
 					int an = (k + l - 1) / 2;
 					ArrayList<Integer> list = new ArrayList<Integer>();

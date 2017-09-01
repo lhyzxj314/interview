@@ -1,4 +1,4 @@
-package netease.p2018;
+package company.netease.p2018;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class Main3 {
     Scanner sc = new Scanner(System.in);
     String str = sc.nextLine();
     sc.close();
-
+    
     if (str == null || str.length() <= 1) {
       System.out.println("0");
       return;

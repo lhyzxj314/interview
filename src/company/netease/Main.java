@@ -1,4 +1,4 @@
-package netease;
+package company.netease;
 
 import java.util.*;
 

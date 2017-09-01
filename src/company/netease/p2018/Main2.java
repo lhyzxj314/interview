@@ -1,4 +1,4 @@
-package netease.p2018;
+package company.netease.p2018;
 
 import java.util.PriorityQueue;
 import java.util.Scanner;

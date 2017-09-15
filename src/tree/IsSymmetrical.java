@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,26 +13,88 @@ import java.util.List;
 public class IsSymmetrical {
   
     public static void main(String[] args) {
-      TreeNode root = new TreeNode(5);
-      TreeNode n1   = new TreeNode(5);
-      TreeNode n2   = new TreeNode(5);
+      TreeNode root = new TreeNode(8);
+      TreeNode n1   = new TreeNode(6);
+      TreeNode n2   = new TreeNode(6);
       TreeNode n3   = new TreeNode(5);
-      TreeNode n4   = new TreeNode(5);
-      TreeNode n5   = new TreeNode(5);
+      TreeNode n4   = new TreeNode(7);
+      TreeNode n5   = new TreeNode(7);
       TreeNode n6   = new TreeNode(5);
       
       root.left = n1;
-      n1.left = n2;
-      n2.left = n3;
-      root.right = n4;
-      n4.right = n5;
-      n5.left = n6;
+      root.right = n2;
+      n1.left = n3;
+      n1.right = n4;
+      n2.left = n5;
+      n2.right = n6;
       
       boolean res = new IsSymmetrical().isSymmetrical(root);
       System.out.println(res);
     }
     
+    /**
+     * 解法三：
+     * 非递归解法
+     * @param root
+     * @return
+     */
     boolean isSymmetrical(TreeNode root)
+    {
+        if (root == null)
+            return true;
+        
+        LinkedList<TreeNode> leftStack = new LinkedList<TreeNode>();
+        LinkedList<TreeNode> rightStack = new LinkedList<TreeNode>();
+        TreeNode leftNode = root;
+        TreeNode rightNode = root;
+        
+        while (leftNode != null || !leftStack.isEmpty()) {
+          while (leftNode != null) {
+            
+            if (rightNode == null) 
+              return false;
+            
+            if (leftNode.val == rightNode.val) {
+              leftStack.addLast(leftNode);
+              leftNode = leftNode.left;
+              
+              rightStack.addLast(rightNode);
+              rightNode = rightNode.right;
+            } else {
+              return false;
+            }
+          }
+          leftNode = leftStack.pollLast().right;
+          rightNode = rightStack.pollLast().left;
+        }
+        return true;
+    }
+    
+    /**
+     * 解法二：
+     * 复制一颗新树，同步遍历的同时进行判断
+     * @param root
+     * @return
+     */
+    boolean isSymmetrical2(TreeNode root)
+    {
+        if (root == null)
+            return true;
+        
+        TreeNode newTree = getMirror(root);
+        boolean res = preOrderAndCompare(root, newTree);
+        
+        return res;
+    }
+    
+    /**
+     * 解法一:
+     * 通过前序遍历、中序遍历结果判断两棵树是否对称
+     * ！存在问题：所有节点的值相等的情况判断不了
+     * @param root
+     * @return
+     */
+    boolean isSymmetrical1(TreeNode root)
     {
         if (root == null)
             return true;
@@ -84,14 +147,6 @@ public class IsSymmetrical {
         midOrder(root.right, midOrder);
     }
     
-     /*private void midOrderSym(TreeNode root, List<TreeNode> midOrder) {
-        if (root == null) return;
-        
-        midOrderSym(root.right, midOrder);
-        midOrder.add(root);
-        midOrderSym(root.left, midOrder);
-    }*/
-    
      private void preOrder(TreeNode root, List<TreeNode> preOrder) {
         if (root == null) return;
         
@@ -99,14 +154,21 @@ public class IsSymmetrical {
         preOrder(root.left, preOrder);
         preOrder(root.right, preOrder);
      }
-    
-     /*private void preOrderSym(TreeNode root, List<TreeNode> preOrder) {
-        if (root == null) return;
-        
-        preOrder.add(root);
-        preOrderSym(root.right, preOrder);
-        preOrderSym(root.left, preOrder);
-     }*/
+     
+     private boolean preOrderAndCompare(TreeNode root, TreeNode newRoot) {
+       if (root == null && newRoot == null) return true;
+       
+       if ((root.left == null && newRoot.left != null) ||
+           (root.left != null && newRoot.left == null) ||
+           (root.right != null && newRoot.right == null) ||
+           (root.right == null && newRoot.right != null) ||
+           root.val != newRoot.val)
+         return false;
+       
+       boolean flag1 = preOrderAndCompare(root.left, newRoot.left);
+       boolean flag2 = preOrderAndCompare(root.right, newRoot.right);
+       return flag1 && flag2;
+    }
     
     private TreeNode getMirror(TreeNode root) {
         if (root == null)

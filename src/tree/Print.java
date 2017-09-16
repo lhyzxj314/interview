@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * 按之字形打印二叉树
@@ -39,39 +40,41 @@ public class Print {
     if (pRoot == null)
       return result;
     
-    ArrayList<TreeNode> lineNode = new ArrayList<TreeNode>();
-    lineNode.add(pRoot);
+    LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+    stack.push(pRoot);
     
     boolean left2right = false;
-    while (!lineNode.isEmpty()) {
+    while (!stack.isEmpty()) {
       ArrayList<Integer> tmpArray = new ArrayList<Integer>();
-      for (int i = 0; i < lineNode.size(); i++) {
-        tmpArray.add(lineNode.get(i).val);
+      for (int i = 0; i < stack.size(); i++) {
+        tmpArray.add(stack.get(i).val);
       }
       result.add(tmpArray);
       
       if (left2right) {
-        ArrayList<TreeNode> tmpArray1 = new ArrayList<TreeNode>();
-        for (int i = lineNode.size() - 1; i >= 0; i--) {
-          TreeNode node = lineNode.get(i);
+        LinkedList<TreeNode> tempStack = new LinkedList<TreeNode>();
+        while (!stack.isEmpty()) {
+          TreeNode node = stack.pop();
           if (node.left != null)
-            tmpArray1.add(node.left);
+            tempStack.push(node.left);
           if (node.right != null)
-            tmpArray1.add(node.right);
+            tempStack.push(node.right);
         }
-        lineNode = tmpArray1;
         
+        stack = tempStack;
         left2right = !left2right;
+        
       } else {
-        ArrayList<TreeNode> tmpArray1 = new ArrayList<TreeNode>();
-        for (int i = lineNode.size() - 1; i >= 0; i--) {
-          TreeNode node = lineNode.get(i);
+        LinkedList<TreeNode> tempStack = new LinkedList<TreeNode>();
+        while (!stack.isEmpty()) {
+          TreeNode node = stack.pop();
           if (node.right != null)
-            tmpArray1.add(node.right);
+            tempStack.push(node.right);
           if (node.left != null)
-            tmpArray1.add(node.left);
+            tempStack.push(node.left);
         }
-        lineNode = tmpArray1;
+        
+        stack = tempStack;
         left2right = !left2right;
       }
     }

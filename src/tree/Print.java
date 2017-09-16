@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * 按之字形打印二叉树
- * 请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
+ * 
  * @author xshrimp
  * 2017年9月15日
  */
@@ -26,7 +25,7 @@ public class Print {
     n2.left = n5;
     n2.right = n6;
     
-    ArrayList<ArrayList<Integer>> res = new Print().print(root);
+    ArrayList<ArrayList<Integer>> res = new Print().print1(root);
     for (ArrayList<Integer> array : res) {
       for (Integer i : array)
         System.out.print(i + " ");
@@ -35,6 +34,12 @@ public class Print {
     }
   }
   
+  /**
+   * 按之字形打印二叉树
+   * 请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
+   * @param pRoot
+   * @return
+   */
   public ArrayList<ArrayList<Integer>> print(TreeNode pRoot) {
     ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
     if (pRoot == null)
@@ -77,6 +82,39 @@ public class Print {
         stack = tempStack;
         left2right = !left2right;
       }
+    }
+    return result;
+  }
+  
+  /**
+   * 层序遍历二叉树
+   * @param pRoot
+   * @return
+   */
+  public ArrayList<ArrayList<Integer>> print1(TreeNode pRoot) {
+    ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+    if (pRoot == null)
+      return result;
+    
+    LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+    queue.offer(pRoot);
+    
+    while (!queue.isEmpty()) {
+      ArrayList<Integer> lineRes = new ArrayList<Integer>();
+      for (int i = 0; i < queue.size(); i++) {
+        lineRes.add(queue.get(i).val);
+      }
+      result.add(lineRes);
+      
+      LinkedList<TreeNode> tempQueue = new LinkedList<TreeNode>();
+      while (!queue.isEmpty()) {
+        TreeNode node = queue.poll();
+        if (node.left != null)
+          tempQueue.offer(node.left);
+        if (node.right != null)
+          tempQueue.offer(node.right);
+      }
+      queue = tempQueue;
     }
     return result;
   }

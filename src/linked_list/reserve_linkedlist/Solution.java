@@ -3,76 +3,76 @@ package linked_list.reserve_linkedlist;
 
 public class Solution {
 
-	public static void main(String[] args) {
-		ListNode h1 = new ListNode(1);
-		ListNode n1 = new ListNode(2);
-		h1.next = n1;
-		ListNode n2 = new ListNode(3);
-		n1.next = n2;
+  public static void main(String[] args) {
+    ListNode h1 = new ListNode(1);
+    ListNode n1 = new ListNode(2);
+    h1.next = n1;
+    ListNode n2 = new ListNode(3);
+    n1.next = n2;
 
-		ListNode n3 = new ListNode(6);
-		n2.next = n3;
-		ListNode n4 = new ListNode(7);
-		n3.next = n4;
+    ListNode n3 = new ListNode(6);
+    n2.next = n3;
+    ListNode n4 = new ListNode(7);
+    n3.next = n4;
 
-		ListNode h2 = new ListNode(4);
-		n1 = new ListNode(5);
-		h2.next = n1;
-		n1.next = n3;
+    ListNode h2 = new ListNode(4);
+    n1 = new ListNode(5);
+    h2.next = n1;
+    n1.next = n3;
 
-		ListNode l = new Solution().ReverseList3(h1);
-		System.out.println(l.val);
-	}
+    ListNode l = new Solution().ReverseList3(h1);
+    System.out.println(l.val);
+  }
 
-	/** µü´ú£¬´ÓÍ·µ½Î²Öğ¸öĞŞ¸ÄÒıÓÃ·½Ïò */
-	public ListNode ReverseList1(ListNode head) {
-		if (head == null)
-			return head;
-		
-		ListNode pre = null;
-		ListNode cur = head;
-		ListNode tmp = null; // ¸¨ÖúÒıÓÃ
-		while (cur != null) {
-			tmp = cur.next;
-			cur.next = pre;
-			pre = cur;
-			cur = tmp;
-		}
-		return pre;
-	}
+  /** è¿­ä»£ï¼Œä»å¤´åˆ°å°¾é€ä¸ªä¿®æ”¹å¼•ç”¨æ–¹å‘ */
+  public ListNode ReverseList1(ListNode head) {
+    if (head == null)
+      return head;
+    
+    ListNode pre = null;
+    ListNode cur = head;
+    ListNode tmp = null; // è¾…åŠ©å¼•ç”¨
+    while (cur != null) {
+      tmp = cur.next;
+      cur.next = pre;
+      pre = cur;
+      cur = tmp;
+    }
+    return pre;
+  }
 
-	/** µİ¹é£¬´ÓÎ²µ½Í·Öğ¸öĞŞ¸ÄÒıÓÃ·½Ïò */
-	public ListNode ReverseList2(ListNode head) {
-		if (head == null) 	   // ¿ÕÁ´±í
-			return null;
+  /** é€’å½’ï¼Œä»å°¾åˆ°å¤´é€ä¸ªä¿®æ”¹å¼•ç”¨æ–¹å‘ */
+  public ListNode ReverseList2(ListNode head) {
+    if (head == null)      // ç©ºé“¾è¡¨
+      return null;
 
-		if (head.next == null) // µİ¹éÖÕÖ¹Ìõ¼ş
-			return head;
-		else {
-			ListNode ptr = head;
-			head = ReverseList2(head.next);
-			ptr.next.next = ptr;
-			ptr.next = null;
-		}
-		return head;
-	}
-	
-	/** µü´ú·½·¨£¬ÀûÓÃÁ´±íµÄ»ù±¾²Ù×÷£º¼ÓÈë½Úµã¡¢É¾³ı½Úµã*/
-	public ListNode ReverseList3(ListNode head) {
-		if (head == null) 	   // ¿ÕÁ´±í
-			return null;
-		
-		ListNode oldHead = head;
-		while (oldHead.next != null) {
-			// É¾³ıÔ­Í·½áµãµÄÏÂÒ»¸ö½Úµã
-			ListNode tmp = oldHead.next;
-			oldHead.next = oldHead.next.next;
-			
-			// ½«±»É¾³ı½Úµã·Åµ½Á´±íÍ·²¿
-			tmp.next = head;
-			head = tmp;
-		}
-		return head;
-	}
-	
+    if (head.next == null) // é€’å½’ç»ˆæ­¢æ¡ä»¶
+      return head;
+    else {
+      ListNode ptr = head;
+      head = ReverseList2(head.next);
+      ptr.next.next = ptr;
+      ptr.next = null;
+    }
+    return head;
+  }
+  
+  /** è¿­ä»£æ–¹æ³•ï¼Œåˆ©ç”¨é“¾è¡¨çš„åŸºæœ¬æ“ä½œï¼šåŠ å…¥èŠ‚ç‚¹ã€åˆ é™¤èŠ‚ç‚¹*/
+  public ListNode ReverseList3(ListNode head) {
+    if (head == null)      // ç©ºé“¾è¡¨
+      return null;
+    
+    ListNode oldHead = head;
+    while (oldHead.next != null) {
+      // åˆ é™¤åŸå¤´ç»“ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+      ListNode tmp = oldHead.next;
+      oldHead.next = oldHead.next.next;
+      
+      // å°†è¢«åˆ é™¤èŠ‚ç‚¹æ”¾åˆ°é“¾è¡¨å¤´éƒ¨
+      tmp.next = head;
+      head = tmp;
+    }
+    return head;
+  }
+  
 }

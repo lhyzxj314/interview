@@ -6,7 +6,7 @@ public class AbstractFactoryDemo {
 		AbstractFactory colorFactory = FactoryProducer.getFactory("COLOR");
 		AbstractFactory shapeFactory = FactoryProducer.getFactory("SHAPE");
 		shapeFactory.getShape("circle").draw();
-		colorFactory.getColor("red").fill();;
+		colorFactory.getColor("red").fill();
 	}
 
 }

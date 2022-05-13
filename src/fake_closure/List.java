@@ -1,5 +1,6 @@
 package fake_closure;
 
+/*
 class List<T> {
   T hd;
   List<T> tl;
@@ -13,12 +14,14 @@ class List<T> {
     return res;
   }
   
-  /**
+  */
+/**
    * 递归实现遍历，虽然使用Java运行效率稍低(无函数式编程语言的尾递归优化)，但是实现更简洁
    * @param f
    * @param list
    * @return
-   */
+   *//*
+
   private <B> List<B> map_helper(Func<T, B> f, final List<T> list) {
     if (list == null) 
       return null;
@@ -35,3 +38,4 @@ class List<T> {
     return str.toString();
   }
 }
+*/

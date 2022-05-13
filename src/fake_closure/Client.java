@@ -5,6 +5,7 @@ package fake_closure;
  * @author xshrimp
  * 2017年2月17日
  */
+/*
 public class Client {
   static List<String> intToString(List<Integer> intList) {
     List<String> newList = intList.map(new Func<Integer, String>() {
@@ -27,3 +28,4 @@ public class Client {
     System.out.println(newList);
   }
 }
+*/

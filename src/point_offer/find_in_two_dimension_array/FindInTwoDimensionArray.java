@@ -6,7 +6,7 @@ package point_offer.find_in_two_dimension_array;
  *
  * 示例：下面的二维数组就是每行、每列都是递增排序，如果在这个数组中查找数字7，则放回true；如果查找数字5，由于数组不含该数字，则返回false。
  *
- * 1 2 8 9
+ * 1 3 8 9
  * 2 4 6 12
  * 4 7 10 13
  * 6 8 11 15
@@ -14,20 +14,37 @@ package point_offer.find_in_two_dimension_array;
  */
 public class FindInTwoDimensionArray {
   /**
-   * 解法1：从左下角开始查找，小于则右移，大于则左移
+   * 解法1：从左下角开始查找
    * 时间复杂度：O(n+m)
+   * 空间复杂度：O(1)
    * @param target
    * @param array
    * @return
    */
   public boolean solution1(int target, int[][] array) {
-    return false;
+      if (array == null || array.length == 0 || array[0].length == 0)
+          return false;
+
+      int n = array.length;
+      int m = array[0].length;
+      int i = n - 1;
+      int j = 0;
+      while (i >= 0 && j <= m - 1) {
+            if (array[i][j] == target) {
+                return true;
+            } else if (target < array[i][j]) {
+                i--;
+            } else {
+                j++;
+            }
+      }
+      return false;
   }
 
   /**
    * 解法2：使用二分查找
    * 时间复杂度：O(nlogm)
-   *
+   * 空间复杂度：O(1)
    * @param target
    * @param array
    * @return
@@ -65,6 +82,34 @@ public class FindInTwoDimensionArray {
         }
         return false;
   }
+
+    /**
+     * 解法3：从右上角开始查找(与方法2类似)
+     * 时间复杂度：O(n+m)
+     * 空间复杂度：O(1)
+     * @param target
+     * @param array
+     * @return
+     */
+    public boolean solution3(int target, int[][] array) {
+        if (array == null || array.length == 0 || array[0].length == 0)
+            return false;
+
+        int n = array.length;
+        int m = array[0].length;
+        int i = 0;
+        int j = m - 1;
+        while (i <= n - 1 && j >= 0) {
+            if (array[i][j] == target) {
+                return true;
+            } else if (target < array[i][j]) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        return false;
+    }
   
   public static void main(String[] args) {
         FindInTwoDimensionArray obj = new FindInTwoDimensionArray();

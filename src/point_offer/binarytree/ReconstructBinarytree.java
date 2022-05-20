@@ -64,7 +64,7 @@ public class ReconstructBinarytree {
     /**
      * 利用map便于直接根据先序遍历的值定位到中序遍历的索引
      */
-    private Map<Integer, Integer> map = new HashMap<>();
+    private Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
     /**
      * @Author rex
